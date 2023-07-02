@@ -5,7 +5,7 @@ declare global{
 }
 
 Array.prototype.swap = function(indexA: number, indexB: number): number []{
-  let stored = this[indexA];
+  const stored = this[indexA];
   this[indexA] = this[indexB];
   this[indexB] = stored
   return [ ...this ];
