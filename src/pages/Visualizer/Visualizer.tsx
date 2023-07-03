@@ -1,11 +1,11 @@
 import { useState } from "react"
 import { bubbleSort } from "../../algorithms";
 import { StyledDiv } from "./Visualizer.styles"
-import { randomIntegerArrayGenerator } from "../../utils/generate";
+import { generate } from "../../utils";
 
 export const Visualizer = () => {
   const [greenColor, setGreenColor] = useState<boolean>(false);
-  const array = randomIntegerArrayGenerator(5);
+  const array = generate(5);
   console.log("array", array);
   console.log("movements", bubbleSort(array))
   return (
