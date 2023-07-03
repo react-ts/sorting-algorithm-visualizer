@@ -1,10 +1,13 @@
 import { useState } from "react"
 import { bubbleSort } from "../../algorithms";
 import { StyledDiv } from "./Visualizer.styles"
+import { generate } from "../../utils";
 
 export const Visualizer = () => {
   const [greenColor, setGreenColor] = useState<boolean>(false);
-  console.log("movements", bubbleSort([4,3,2,1]))
+  const array = generate(5);
+  console.log("array", array);
+  console.log("movements", bubbleSort(array))
   return (
     <StyledDiv 
       greenColor={greenColor}>
@@ -12,6 +15,7 @@ export const Visualizer = () => {
         <p>
           Visualizer Page
         </p>     
+
     </StyledDiv>
   )
 }
