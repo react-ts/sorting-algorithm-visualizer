@@ -7,7 +7,7 @@ export const Visualizer = () => {
   const [greenColor, setGreenColor] = useState<boolean>(false);
   const array = generate(5);
   console.log("array", array);
-  console.log("movements", bubbleSort(array))
+  console.log("movements", bubbleSort([4, 3, 2, 1]))
   return (
     <StyledDiv 
       greenColor={greenColor}>
