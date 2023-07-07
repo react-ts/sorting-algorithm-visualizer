@@ -13,7 +13,7 @@ export const Visualizer = () => {
       greenColor={greenColor}>
         <button onClick={() => setGreenColor(!greenColor)}>CHANGE COLOR</button>
         <p>
-          Visualizer Page
+          Visualizer Page, now on Firebase
         </p>     
 
     </StyledDiv>
