@@ -18,9 +18,9 @@ export const insertionSort = (array: number[]) => {
       isSwap = true;
     }
     array[j + 1] = key;
-    const flag: IMovement = { indexA: j + 1, indexB: i }
+    const movement: IMovement = { indexA: j + 1, indexB: i }
     movements.push({
-      ...flag,
+      ...movement,
       swap: isSwap
     });
 
