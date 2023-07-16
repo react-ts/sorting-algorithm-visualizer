@@ -1,1 +1,1 @@
-export * from "./IconComponent/IconComponent"
+export * from "./IconComponent"

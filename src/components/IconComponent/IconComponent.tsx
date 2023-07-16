@@ -1,6 +1,6 @@
 import { StyledSpan } from "./IconComponent.styles.";
 
-interface Props {
+interface IconProps {
   icon: string,
   color?: string,
   fontSize?: number,
@@ -10,10 +10,8 @@ interface Props {
   opticalSize?: number
 }
 
-export default function IconComponent({ icon,  color , fontSize, fill, weight, grade, opticalSize }: Props) {
-  return (
-    <StyledSpan className="material-symbols-outlined" {...{color, fontSize, fill, weight, grade, opticalSize}}>
-      {icon}
-    </StyledSpan>
-  );
-}
+export const IconComponent = ({ icon,  color , fontSize, fill, weight, grade, opticalSize }: IconProps) => (
+  <StyledSpan className="material-symbols-outlined" {...{ color, fontSize, fill, weight, grade, opticalSize }}>
+    {icon}
+  </StyledSpan>
+)

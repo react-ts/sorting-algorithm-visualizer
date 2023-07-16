@@ -2,7 +2,7 @@ import { useState } from "react"
 import { bubbleSort, insertionSort } from "../../algorithms";
 import { StyledDiv } from "./Visualizer.styles"
 import { generate } from "../../utils";
-import IconComponent from "../../components/IconComponent/IconComponent";
+import { IconComponent } from "../../components";
 
 export const Visualizer = () => {
   const [greenColor, setGreenColor] = useState<boolean>(false);
