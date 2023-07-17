@@ -18,4 +18,5 @@ jobs:
           firebaseServiceAccount: >-
             ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SORTING_ALGORITHM_VISUAL_DC41B
             }}
+          channelId: preview  
           projectId: sorting-algorithm-visual-dc41b
