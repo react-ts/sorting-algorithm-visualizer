@@ -10,8 +10,8 @@ interface IconProps {
   opticalSize?: number
 }
 
-export const IconComponent = ({ icon,  color , fontSize, fill, weight, grade, opticalSize }: IconProps) => (
-  <StyledSpan className="material-symbols-outlined" {...{ color, fontSize, fill, weight, grade, opticalSize }}>
-    {icon}
+export const IconComponent = ({ icon, ...rest } : IconProps) => (
+  <StyledSpan className="material-symbols-outlined" { ...rest }>
+    { icon }
   </StyledSpan>
 )
