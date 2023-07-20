@@ -2,7 +2,7 @@ import { IColorPalette } from "../interfaces/IColorPalette";
 import { IHslColor } from "../interfaces/IHslColor";
 import { IHslColorGrade } from "../interfaces/IHslColorGrade";
 
-interface IFindHslColor {
+export interface IFindHslColor {
   color: keyof IColorPalette,
   grade?: keyof IHslColorGrade<{}>,
 }

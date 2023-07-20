@@ -1,2 +1,2 @@
-export * from "./IconComponent"
+export * from "./Icon"
 export * from './themes'

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { IconComponent } from "../../components";
+import { Icon } from "../../components";
 import { StyledDiv } from "./Visualizer.styles"
 
 export const Visualizer = () => {
@@ -15,7 +15,14 @@ export const Visualizer = () => {
 
       </StyledDiv>
       <div>
-        <IconComponent icon="home" fontSize={32} color="blue" grade={100} opticalSize={23} />
+        <Icon
+          icon="home"
+          iconType="outlined"
+          iconColor={{ color: 'success', grade: 300 }}
+          size={24}
+          grade={100}
+          opticalSize={100}
+        />
       </div>
     </>
     
