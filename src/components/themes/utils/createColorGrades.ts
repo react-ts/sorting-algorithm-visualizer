@@ -1,5 +1,5 @@
-import { IHslColor } from "../interfaces/IHslColor";
-import { IHslColorGrade } from "../interfaces/IHslColorGrade";
+import { IHslColor } from "../interfaces/Color/IHslColor";
+import { IHslColorGrade } from "../interfaces/Color/IHslColorGrade";
 
 interface ICreateColorGrades {
   base: IHslColor,

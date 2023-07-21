@@ -1,5 +1,5 @@
-import { IBaseColorPalette } from "../interfaces/IBaseColorPalette"
-import { IColorPalette } from "../interfaces/IColorPalette"
+import { IBaseColorPalette } from "../interfaces/Color/IBaseColorPalette"
+import { IColorPalette } from "../interfaces/Color/IColorPalette"
 import { createColorGrades } from "./createColorGrades"
 
 export const createColorPalette = ({

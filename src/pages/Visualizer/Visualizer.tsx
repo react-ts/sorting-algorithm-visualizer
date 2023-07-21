@@ -1,17 +1,23 @@
 import { useState } from "react"
-import { Icon } from "../../components";
+import { Heading, Icon } from "../../components";
 import { StyledDiv } from "./Visualizer.styles"
 
 export const Visualizer = () => {
   const [greenColor, setGreenColor] = useState<boolean>(false);
+  
   return (
     <>
       <StyledDiv
         greenColor={greenColor}>
-        <button onClick={() => setGreenColor(!greenColor)}>CHANGE COLOR</button>
-        <p>
-          Visualizer Page, now on Firebase
-        </p>
+        <button onClick={() => setGreenColor(!greenColor)}>CHANGE COLOR / CAPITALIZED</button>
+        <Heading 
+          as="h1"
+          size="xl"
+          weight="bolder"
+          textColor={{ color: greenColor? 'success': 'error', grade: 900 }}
+          capitalized={greenColor}>
+            Visualizer Page, now on Firebase
+        </Heading>
 
       </StyledDiv>
       <div>

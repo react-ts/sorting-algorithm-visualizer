@@ -1,6 +1,6 @@
-import { IColorPalette } from "../interfaces/IColorPalette";
-import { IHslColor } from "../interfaces/IHslColor";
-import { IHslColorGrade } from "../interfaces/IHslColorGrade";
+import { IColorPalette } from "../interfaces/Color/IColorPalette";
+import { IHslColor } from "../interfaces/Color/IHslColor";
+import { IHslColorGrade } from "../interfaces/Color/IHslColorGrade";
 
 export interface IFindHslColor {
   color: keyof IColorPalette,
