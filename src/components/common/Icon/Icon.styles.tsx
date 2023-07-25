@@ -8,7 +8,8 @@ export interface IconProps {
   fill?: number,
   weight?: number,
   grade?: number,
-  opticalSize?: number
+  opticalSize?: number,
+  onClick?: () => void,
 }
 
 export const StyledSpan = styled.span<Omit<IconProps, "icon">>`
@@ -25,4 +26,8 @@ export const StyledSpan = styled.span<Omit<IconProps, "icon">>`
     'GRAD' ${grade || 200},
     'opsz' ${opticalSize || 48}
   `};
+
+  &:hover {
+    cursor: pointer;
+  }
 `

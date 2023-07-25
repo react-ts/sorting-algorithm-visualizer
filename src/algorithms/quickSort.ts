@@ -1,6 +1,6 @@
 import { IMovement } from "../interfaces";
 import { capture } from "../utils";
-import '../utils/swap'
+import '../utils/swap';
 
 interface IQuickSortParams {
   array: number [],
@@ -24,7 +24,7 @@ const partition = ({ array, start, end, capture }: IQuickSortParams) => {
   }
 
   array.voidSwap(i, end) 
-  capture(i, end)
+  capture(i, end, true)
   return i;
 }
 

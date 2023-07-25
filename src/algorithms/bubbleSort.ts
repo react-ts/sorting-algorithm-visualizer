@@ -1,27 +1,23 @@
 import { IMovement } from "../interfaces";
-import '../utils/swap'
+import { capture } from "../utils";
+import '../utils/swap';
 
 export const bubbleSort = (array: number []) => {
   const movements: IMovement [] = [];
-  
-  for(let i = 0; i < array.length; i++){
-    for(let j = i + 1; j < array.length; j++){
-      const movement: IMovement = { indexA: i, indexB: j };
-      if(array[i] > array[j]){
-        array = array.swap(i, j);
-        movements.push({ 
-          ...movement,
-          swap: true
-        })
+  const captureMove = capture(movements)
+  let copyArray = [ ...array ];
+
+  for(let i = 0; i < copyArray.length; i++){
+    for(let j = i + 1; j < copyArray.length; j++){
+      if(copyArray[i] > copyArray[j]){
+        copyArray = copyArray.swap(i, j);
+        captureMove(i, j, true)
       } else {
-        movements.push({ 
-          ...movement,
-          swap: false 
-        })
+        captureMove(i, j, false)
       }
     }
   }
-
+  
   return movements;
 }
 

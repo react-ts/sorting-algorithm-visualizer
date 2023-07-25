@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react"
-import { IFontSize, IFontWeight, Alignment } from "../themes/interfaces/Typography"
+import { Alignment, IFontSize, IFontWeight } from "../themes/interfaces/Typography"
 import { IFindHslColor } from "../themes/utils/findPaletteColor"
 
 export interface ITypoProps<T extends HTMLElement> extends HTMLAttributes<T> {
