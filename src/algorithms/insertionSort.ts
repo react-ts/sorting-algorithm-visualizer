@@ -1,32 +1,22 @@
 import { IMovement } from "../interfaces";
-import '../utils/swap'
+import { capture } from "../utils";
+import '../utils/swap';
 
 export const insertionSort = (array: number[]) => {
   const movements: IMovement[] = [];
-  for (let i = 1; i < array.length; i++) {
-    let isSwap = false;
-    let key = array[i];
+  const captureMove = capture(movements)
+  let copyArray = [ ...array ];
+
+  for (let i = 1; i < copyArray.length; i++) {
+    let key = copyArray[i];
     let j = i - 1;
-    while (j >= 0 && key < array[j]) {
-      const movement: IMovement = { indexA: j, indexB: j + 1 }
-      array = array.swap(j, j + 1);
-      movements.push({
-        ...movement,
-        swap: true
-      })
+    while (j >= 0 && key < copyArray[j]) {
+      copyArray = copyArray.swap(j, j + 1);
+      captureMove(j, j + 1, true)
       j -= 1;
-      isSwap = true;
     }
-    array[j + 1] = key;
-    const movement: IMovement = { indexA: j + 1, indexB: i }
-    movements.push({
-      ...movement,
-      swap: isSwap
-    });
-
-
+    copyArray[j + 1] = key;
   }
   return movements;
-
 }
 

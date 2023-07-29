@@ -1,37 +1,38 @@
-import { useState } from "react"
-import { Heading, Icon } from "../../components";
-import { StyledDiv } from "./Visualizer.styles"
+import { useState } from "react";
+import { insertionSort } from "../../algorithms";
+import { Icon } from "../../components";
+import { BarList } from "../../components/common/BarList/BarList";
+import { useDelay } from "../../components/hooks";
+import { IMovement } from "../../interfaces";
 
 export const Visualizer = () => {
-  const [greenColor, setGreenColor] = useState<boolean>(false);
+  const [ movement, setMovement ] = useState<IMovement | null>(null)
+  const [ array ] = useState<number []>([ 5, 4, 6, 10, 3, 2, 1 ]);
+  const delay = useDelay(1);
   
-  return (
-    <>
-      <StyledDiv
-        greenColor={greenColor}>
-        <button onClick={() => setGreenColor(!greenColor)}>CHANGE COLOR / CAPITALIZED</button>
-        <Heading 
-          as="h1"
-          size="xl"
-          weight="bolder"
-          textColor={{ color: greenColor? 'success': 'error', grade: 900 }}
-          capitalized={greenColor}>
-            Visualizer Page, now on Firebase
-        </Heading>
+  const playAnimation = async () => {
+    const movements = insertionSort(array);
+    for(let i = 0; i < movements.length; i++){
+      setMovement((currentState) => ({ ...currentState, ...movements[i] }))
+      await delay()
+    }
+  }
 
-      </StyledDiv>
+  return (
+    <div>
       <div>
-        <Icon
-          icon="home"
-          iconType="outlined"
-          iconColor={{ color: 'success', grade: 300 }}
-          size={24}
-          grade={100}
-          opticalSize={100}
+        <Icon 
+          icon={'play_circle'}
+          iconColor={{color: 'success', grade: 800}}
+          size={45}
+          onClick={playAnimation}  
         />
       </div>
-    </>
-    
-
+      <div>
+        <BarList 
+          collection={array}
+          movement={movement} />
+      </div>
+    </div>
   )
 }
