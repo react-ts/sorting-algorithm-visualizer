@@ -4,14 +4,16 @@ import { Icon } from "../../components";
 import { BarList } from "../../components/common/BarList/BarList";
 import { useDelay } from "../../components/hooks";
 import { IMovement } from "../../interfaces";
+import mergeSort from "../../algorithms/mergeSort";
 
+console.log(mergeSort([ 5, 4, 6, 10, 3, 2, 1, 9, 11 ]))
 export const Visualizer = () => {
   const [ movement, setMovement ] = useState<IMovement | null>(null)
-  const [ array ] = useState<number []>([ 5, 4, 6, 10, 3, 2, 1 ]);
+  const [ array ] = useState<number []>([ 5, 4, 6, 10, 3, 2, 1, 9, 11 ]);
   const delay = useDelay(1);
   
   const playAnimation = async () => {
-    const movements = insertionSort(array);
+    const movements = mergeSort(array);
     for(let i = 0; i < movements.length; i++){
       setMovement((currentState) => ({ ...currentState, ...movements[i] }))
       await delay()
