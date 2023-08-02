@@ -16,28 +16,32 @@ const merge = ({ array, start, mid, end, capture }: IMergeSortParams) => {
 
     while((i <= mid) && (j <= end)){
         if(array[i] <= array[j]){
-          capture(i, arr.length, true)
             arr.push(array[i++])
         } else {
-          capture(j, arr.length, true)
             arr.push(array[j++])
         }
     }
 
     while(i <= mid){
-        capture(i, arr.length, true)
         arr.push(array[i++])
     }
 
     while(j <= end){
-        capture(j, arr.length, true)
         arr.push(array[j++])
-
     }
-    
+
+    const arrayCopy = array.slice()
+
     for(i=start;i<=end;i++){
+        const oldPosition = arrayCopy.indexOf(arr[i - start])
+        const newPosition = arrayCopy.indexOf(arrayCopy[i])
+
+        if (oldPosition !== newPosition)
+        {
+          arrayCopy.voidSwap(oldPosition, newPosition)
+          capture(oldPosition, newPosition, true)
+        }
         array[i] = arr[i - start]
-        //capture(i - start, i, true)
     }
 
 }
@@ -53,15 +57,14 @@ const exec = ({ array, start, mid, end, capture }: IMergeSortParams) => {
     merge({array, start, mid, end, capture})
 }
 
-const mergeSort = (array: number[]) => {
+export const mergeSort = (array: number[]) => {
     const movements: IMovement[] = [];
-    const arrayCopy = array.slice()
     const start = 0
     const end = array.length - 1
     const mid = Math.floor((start + end) / 2)
 
     exec({ 
-      array: arrayCopy,
+      array,
       start,
       mid,
       end,
@@ -70,5 +73,3 @@ const mergeSort = (array: number[]) => {
 
     return movements
 }
-
-export default mergeSort
