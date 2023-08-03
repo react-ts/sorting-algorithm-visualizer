@@ -41,6 +41,9 @@ const merge = ({ array, start, mid, end, capture }: IMergeSortParams) => {
           arrayCopy.voidSwap(oldPosition, newPosition)
           capture(oldPosition, newPosition, true)
         }
+        else {
+          capture(oldPosition, newPosition, false)
+        }
         array[i] = arr[i - start]
     }
 
