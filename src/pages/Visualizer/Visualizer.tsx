@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Icon } from "../../components";
 import { BarList } from "../../components/common/BarList/BarList";
 import { useDelay } from "../../components/hooks";
 import { IMovement } from "../../interfaces";
