@@ -1,61 +1,51 @@
-import { useState } from "react";
-import { insertionSort, mergeSort } from "../../algorithms";
+import { useEffect, useState } from "react";
 import { Icon } from "../../components";
 import { BarList } from "../../components/common/BarList/BarList";
 import { useDelay } from "../../components/hooks";
 import { IMovement } from "../../interfaces";
 
-export const Visualizer = () => {
-  const [ insertionSortMovement, setInsertionSortMovement ] = useState<IMovement | null>(null)
-  const [ mergeSortMovement, setMergeSortMovement ] = useState<IMovement | null>(null)
-  const [ array ] = useState<number []>([ 5, 4, 14, 6, 10, 3, 2, 1, 12 ]);
-  const delay = useDelay(1);
-  
-  const playInsertionSortAnimation = async () => {
-    const movements = insertionSort(array.slice());
-    for(let i = 0; i < movements.length; i++){
-      setInsertionSortMovement((currentState) => ({ ...currentState, ...movements[i] }))
-      await delay()
-    }
-  }
+type Algorithm = (arr: number[]) => IMovement[]
 
-  const playMergeSortAnimation = async () => {
-    const movements = mergeSort(array.slice());
-    for(let i = 0; i < movements.length; i++){
-      setMergeSortMovement((currentState) => ({ ...currentState, ...movements[i] }))
-      await delay()
+interface IVisualizerParams {
+  arr: number[]
+  algorithm: Algorithm
+  algorithmName: string
+  playAnimation: boolean
+}
+
+
+export const Visualizer = ({ arr, algorithm, algorithmName, playAnimation }: IVisualizerParams) => {
+  const [movement, setMovement] = useState<IMovement | null>(null)
+  const [array] = useState<number[]>(arr);
+  const delay = useDelay(1);
+
+
+
+  useEffect(() => {
+
+    const play = async () => {
+      const movements = algorithm([...array]);
+      for (let i = 0; i < movements.length; i++) {
+        setMovement((currentState) => ({ ...currentState, ...movements[i] }))
+        await delay()
+      }
     }
-  }
+
+    if (playAnimation) {
+      play()
+    }
+  }, [playAnimation, algorithm, array, delay])
+
 
   return (
     <div>
       <div>
-        <Icon 
-          icon={'play_circle'}
-          iconColor={{color: 'success', grade: 800}}
-          size={45}
-          onClick={playInsertionSortAnimation}  
-        />
-        <span>Start insertion sort</span>
+        <span>{algorithmName} sort {playAnimation ? "is playing" : ""}</span>
       </div>
       <div>
-        <BarList 
-          collection={array.slice()}
-          movement={insertionSortMovement} />
-      </div>
-      <div>
-        <Icon 
-          icon={'play_circle'}
-          iconColor={{color: 'success', grade: 800}}
-          size={45}
-          onClick={playMergeSortAnimation}  
-        />
-        <span>Start merge sort</span>
-      </div>
-      <div>
-        <BarList 
-          collection={array.slice()}
-          movement={mergeSortMovement} />
+        <BarList
+          collection={[...array]}
+          movement={movement} />
       </div>
     </div>
   )
