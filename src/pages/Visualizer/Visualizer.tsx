@@ -16,7 +16,7 @@ interface IVisualizerParams {
 export const Visualizer = ({ arr, algorithm, algorithmName, playAnimation }: IVisualizerParams) => {
   const [movement, setMovement] = useState<IMovement | null>(null)
   const [array] = useState<number[]>(arr);
-  const delay = useDelay(1);
+  const delay = useDelay(0.2);
 
 
 
