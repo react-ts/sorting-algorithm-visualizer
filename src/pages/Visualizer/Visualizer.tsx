@@ -1,36 +1,49 @@
-import { useState } from "react";
-import { insertionSort } from "../../algorithms";
-import { Icon } from "../../components";
+import { useEffect, useState } from "react";
 import { BarList } from "../../components/common/BarList/BarList";
 import { useDelay } from "../../components/hooks";
 import { IMovement } from "../../interfaces";
 
-export const Visualizer = () => {
-  const [ movement, setMovement ] = useState<IMovement | null>(null)
-  const [ array ] = useState<number []>([ 5, 4, 6, 10, 3, 2, 1 ]);
+type Algorithm = (arr: number[]) => IMovement[]
+
+interface IVisualizerParams {
+  arr: number[]
+  algorithm: Algorithm
+  algorithmName: string
+  playAnimation: boolean
+}
+
+
+export const Visualizer = ({ arr, algorithm, algorithmName, playAnimation }: IVisualizerParams) => {
+  const [movement, setMovement] = useState<IMovement | null>(null)
+  const [array] = useState<number[]>(arr);
   const delay = useDelay(1);
-  
-  const playAnimation = async () => {
-    const movements = insertionSort(array);
-    for(let i = 0; i < movements.length; i++){
-      setMovement((currentState) => ({ ...currentState, ...movements[i] }))
-      await delay()
+
+
+
+  useEffect(() => {
+
+    const play = async () => {
+      const movements = algorithm([...array]);
+      for (let i = 0; i < movements.length; i++) {
+        setMovement((currentState) => ({ ...currentState, ...movements[i] }))
+        await delay()
+      }
     }
-  }
+
+    if (playAnimation) {
+      play()
+    }
+  }, [playAnimation, algorithm, array, delay])
+
 
   return (
     <div>
       <div>
-        <Icon 
-          icon={'play_circle'}
-          iconColor={{color: 'success', grade: 800}}
-          size={45}
-          onClick={playAnimation}  
-        />
+        <span>{algorithmName} sort {playAnimation ? "is playing" : ""}</span>
       </div>
       <div>
-        <BarList 
-          collection={array}
+        <BarList
+          collection={[...array]}
           movement={movement} />
       </div>
     </div>

@@ -3,7 +3,7 @@ import { createColorPalette } from "./createColorPalette";
 import { createTypographyStyles } from "./createTypographyRules";
 import { findPaletteColor } from "./findPaletteColor";
 
-export const createTheme = ({ palette, typography }: ICreateTheme) : ITheme => {
+export const createTheme = ({ palette, typography, breakpoints }: ICreateTheme) : ITheme => {
   /*
    * Here we can add all custom rules we want to inherit across the components
    * ecosystem.
@@ -13,6 +13,7 @@ export const createTheme = ({ palette, typography }: ICreateTheme) : ITheme => {
   
   return {
     palette: { ...colorPalette, find: findPaletteColor(colorPalette) },
-    typography: { ...typography, create: createTypographyStyles(colorPalette)(typography) }
+    typography: { ...typography, create: createTypographyStyles(colorPalette)(typography) },
+    breakpoints: {...breakpoints}
   }
 };

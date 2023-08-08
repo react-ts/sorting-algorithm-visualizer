@@ -1,3 +1,4 @@
+import { createBreakpoints } from "@mui/system";
 import { ICreateTheme } from "../interfaces/ITheme";
 
 export const defaultThemeValues: ICreateTheme = {
@@ -27,7 +28,7 @@ export const defaultThemeValues: ICreateTheme = {
     black: { h: 0, s: 100, l: 0 },
   },
   typography: {
-    family: 
+    family:
       `Roboto, -apple-system, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
        Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif`,
     size: {
@@ -43,5 +44,15 @@ export const defaultThemeValues: ICreateTheme = {
       bold: 500,
       bolder: 700
     }
-  }
+  },
+  breakpoints: createBreakpoints({
+    values: {
+      xs: 0,
+      sm: 768,
+      md: 960,
+      lg: 1280,
+      xl: 1920
+    }
+  })
+
 }
