@@ -1,12 +1,13 @@
-import { Visualizer } from "../Visualizer"
-import { bubbleSort, insertionSort, mergeSort } from "../../algorithms";
 import Grid from '@mui/material/Grid';
-import { Icon } from "../../components";
 import { useState } from "react";
+import { bubbleSort, insertionSort, mergeSort } from "../../algorithms";
+import { Icon } from "../../components";
+import { generate } from "../../utils";
+import { Visualizer } from "../Visualizer";
 
 export const Main = () => {
 
-  const array = [5, 2, 7, 8, 9, 1, 3]
+  const array = generate(18)
   const [isPlaying, setIsPlaying] = useState(false);
   return (
     <>
