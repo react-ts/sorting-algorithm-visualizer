@@ -1,27 +1,21 @@
 import { IBaseColorPalette } from "../interfaces/Color/IBaseColorPalette"
 import { IColorPalette } from "../interfaces/Color/IColorPalette"
-import { createColorGrades } from "./createColorGrades"
+import { createColors } from "./createColors"
 
 export const createColorPalette = ({
   primary,
   secondary,
-  ternary,
-  accent,
   success,
   warning,
   error,
-  black,
-  white
 }: IBaseColorPalette) => {
   return {
-    primary: createColorGrades(primary),
-    secondary: createColorGrades(secondary),
-    ternary: createColorGrades(ternary),
-    accent: createColorGrades(accent),
-    success: createColorGrades(success),
-    warning: createColorGrades(warning),
-    error: createColorGrades(error),
-    black: black,
-    white: white
+    primary: createColors(primary),
+    secondary: createColors(secondary),
+    success: createColors(success),
+    warning: createColors(warning),
+    error: createColors(error),
+    black: "#000000",
+    white: "#ffffff"
   } as IColorPalette
 }

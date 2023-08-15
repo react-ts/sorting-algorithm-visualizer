@@ -1,31 +1,25 @@
-import { IHslColor } from "../interfaces/Color/IHslColor";
-import { IHslColorGrade } from "../interfaces/Color/IHslColorGrade";
+import * as colors from '@mui/material/colors';
+import { IColorGrade } from "../interfaces/Color/IColorGrade";
 
 interface ICreateColorGrades {
-  base: IHslColor,
-  adjustments?: Partial<IHslColorGrade<IHslColor>>
+  base: keyof typeof colors,
 }
 
-export const createColorGrades = ({
-  base,
-  adjustments,
-}: ICreateColorGrades): IHslColorGrade<IHslColor> => {
-  const calculateGrade = (value: keyof IHslColorGrade<IHslColor>, diff: number = 0): IHslColor => {
-    return { 
-      ...{ ...base, ...adjustments?.[value] },
-      l: (100 - (value / 10) + diff)  
-    } as IHslColor;
+export const createColorGrades = ({ base }: ICreateColorGrades): IColorGrade<string> => {
+  
+  const calculateGrade = (grade: number): any => {
+    return ((colors[base]) as any)[grade];
   }
 
   return {
     100: calculateGrade(100),
-    200: calculateGrade(200, 3),
-    300: calculateGrade(300, 4),
-    400: calculateGrade(400, 4),
-    500: calculateGrade(500, 4),
-    600: calculateGrade(600, 4),
-    700: calculateGrade(700, 4),
-    800: calculateGrade(800, 5),
-    900: calculateGrade(900, 10),
-  } as IHslColorGrade<IHslColor>
+    200: calculateGrade(200),
+    300: calculateGrade(300),
+    400: calculateGrade(400),
+    500: calculateGrade(500),
+    600: calculateGrade(600),
+    700: calculateGrade(700),
+    800: calculateGrade(800),
+    900: calculateGrade(900),
+  } as IColorGrade<string>
 }

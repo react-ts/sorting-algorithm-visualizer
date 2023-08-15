@@ -1,19 +1,19 @@
-import { IHslColor } from "./IHslColor"
-import { IHslColorGrade } from "./IHslColorGrade"
+import * as colors from '@mui/material/colors';
+import { IColorGrade } from "./IColorGrade";
+import { IColorVariant } from './IColorVariant';
 
-interface IBaseColor {
-  base: IHslColor,
-  adjustments?: IHslColorGrade<IHslColor>
+export interface IBaseColor {
+  base: keyof typeof colors,
+  adjustments: {
+    [variant in keyof IColorVariant]: keyof IColorGrade<string>
+  }
 }
 
 export interface IBaseColorPalette {
   primary: IBaseColor,
   secondary: IBaseColor,
-  ternary: IBaseColor,
-  accent: IBaseColor,
+  info: IBaseColor,
   success: IBaseColor,
   warning: IBaseColor
   error: IBaseColor,
-  black: IHslColor,
-  white: IHslColor,
 }

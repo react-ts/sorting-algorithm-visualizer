@@ -1,11 +1,11 @@
 import { IColorPalette } from "../interfaces/Color/IColorPalette";
-import { IFontSize, IFontWeight, Alignment, ITypography } from "../interfaces/Typography";
-import { findPaletteColor, IFindHslColor } from "./findPaletteColor";
+import { Alignment, IFontSize, IFontWeight, ITypography } from "../interfaces/Typography";
+import { IFindColor, findPaletteColor } from "./findPaletteColor";
 
 interface ICreateTypographyStyles {
   weight?: keyof IFontWeight,
   size?: keyof IFontSize,
-  color?: IFindHslColor,
+  color?: IFindColor,
   textAlign?: Alignment 
 }
 

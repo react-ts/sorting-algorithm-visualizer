@@ -3,27 +3,21 @@ import { BarList } from "../../components/common/BarList/BarList";
 import { useDelay } from "../../components/hooks";
 import { IMovement } from "../../interfaces";
 
-type Algorithm = (arr: number[]) => IMovement[]
-
 interface IVisualizerParams {
   arr: number[]
-  algorithm: Algorithm
+  algorithm: (arr: number[]) => IMovement[]
   algorithmName: string
   playAnimation: boolean
 }
-
 
 export const Visualizer = ({ arr, algorithm, algorithmName, playAnimation }: IVisualizerParams) => {
   const [movement, setMovement] = useState<IMovement | null>(null)
   const [array] = useState<number[]>(arr);
   const delay = useDelay(0.2);
 
-
-
   useEffect(() => {
-
     const play = async () => {
-      const movements = algorithm([...array]);
+      const movements = algorithm([ ...array ]);
       for (let i = 0; i < movements.length; i++) {
         setMovement((currentState) => ({ ...currentState, ...movements[i] }))
         await delay()

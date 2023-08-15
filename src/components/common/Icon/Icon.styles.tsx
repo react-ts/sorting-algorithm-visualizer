@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
-import { IFindHslColor } from '../themes/utils/findPaletteColor'
+import { IFindColor } from '../themes/utils/findPaletteColor'
 
 export interface IconProps {
   icon: string,
-  iconColor?: IFindHslColor,
+  iconColor?: IFindColor,
   size?: number,
   fill?: number,
   weight?: number,
