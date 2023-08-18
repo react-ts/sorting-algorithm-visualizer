@@ -1,4 +1,5 @@
 export * from './IBaseColorPalette';
+export * from './IColorGrade';
 export * from './IColorPalette';
-export * from './IHslColor';
-export * from './IHslColorGrade';
+
+

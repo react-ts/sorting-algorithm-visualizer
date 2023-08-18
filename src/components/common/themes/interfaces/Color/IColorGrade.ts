@@ -1,4 +1,4 @@
-export interface IHslColorGrade<T, > {
+export interface IColorGrade<T, > {
   100: T,
   200: T,
   300: T,

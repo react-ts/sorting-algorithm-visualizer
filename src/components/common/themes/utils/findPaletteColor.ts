@@ -1,24 +1,27 @@
+import { IColorGrade } from "../interfaces/Color";
 import { IColorPalette } from "../interfaces/Color/IColorPalette";
-import { IHslColor } from "../interfaces/Color/IHslColor";
-import { IHslColorGrade } from "../interfaces/Color/IHslColorGrade";
+import { IColorVariant } from "../interfaces/Color/IColorVariant";
 
-export interface IFindHslColor {
+export interface IFindColor {
   color: keyof IColorPalette,
-  grade?: keyof IHslColorGrade<{}>,
-}
-
-const formatHslToCss = ({h, s, l}: IHslColor) => {
-  return `hsl(${h}, ${s}%, ${l}%)`;
+  variant?: keyof IColorVariant,
+  grade?: keyof IColorGrade<{}>,
 }
 
 export const findPaletteColor = 
   (palette: IColorPalette) => 
-  ({ color, grade }: IFindHslColor) => {
+  ({ color, variant, grade }: IFindColor) => {
     switch(color){
       case 'black':
       case 'white':
-        return formatHslToCss(palette[color]);
+        return palette[color];
       default:
-        return formatHslToCss(palette[color][grade ?? 100])
+        if(variant){
+          return palette[color][variant];
+        } else if (grade) {
+          return palette[color][grade];
+        } else {
+          throw new Error("You must specify either a variant or grade.")
+        }
     }
   };
