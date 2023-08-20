@@ -11,13 +11,14 @@ interface IThemeProvider {
 }
 
 export const ThemeProvider = ({ children, customTheme }: IThemeProvider) => {
-  const { palette: muiPalette, ...muiRestStyle } = createThemeMui();
-  const { palette: csmPalette, ...cstRestStyle } = createTheme(customTheme ?? defaultThemeValues);
+  const { palette: muiPalette, typography: muiTypography, ...muiRestStyle } = createThemeMui();
+  const { palette: csmPalette, typography: csmTypography, ...cstRestStyle } = createTheme(customTheme ?? defaultThemeValues);
 
   const theme = {
     ...muiRestStyle,
     ...cstRestStyle,
-    palette: { ...muiPalette, ...csmPalette }
+    palette: { ...muiPalette, ...csmPalette },
+    typography: {...muiTypography, ...csmTypography}
   }
 
  
