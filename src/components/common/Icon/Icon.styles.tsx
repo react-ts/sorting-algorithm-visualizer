@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { IFindColor } from '../themes/utils/findPaletteColor'
+import { IFindColor } from '../Theme/utils/findPaletteColor'
 
 export interface IconProps {
   icon: string,

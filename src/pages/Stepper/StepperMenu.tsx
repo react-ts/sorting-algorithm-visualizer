@@ -1,13 +1,13 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
+import Step from '@mui/material/Step';
+import StepContent from '@mui/material/StepContent';
+import StepLabel from '@mui/material/StepLabel';
+import Stepper from '@mui/material/Stepper';
+import { useState } from 'react';
 import { Paragraph } from '../../components';
-import { playingSubject } from '../../utils/states';
+import { playingSubject } from '../../utils/createObservable';
 
 const steps = [
   {
@@ -27,7 +27,7 @@ const steps = [
 ];
 
 export const StepperMenu = () => {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState<number>(0);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);

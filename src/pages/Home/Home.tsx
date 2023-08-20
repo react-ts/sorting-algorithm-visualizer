@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
-import Toolbar from '@mui/material/Toolbar';
-import Divider from '@mui/material/Divider';
-import { Icon, Paragraph } from '../../components';
-import { AppBar, DrawerHeader, Main } from './Home.styles';
 import { Grid } from '@mui/material';
-import { Visualizer } from '../Visualizer';
-import { generate } from '../../utils';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import Toolbar from '@mui/material/Toolbar';
+import { useTheme } from '@mui/material/styles';
+import * as React from 'react';
 import { bubbleSort, insertionSort, mergeSort } from '../../algorithms';
+import { Icon, Paragraph } from '../../components';
+import { generate } from '../../utils';
+import { playingSubject } from '../../utils/createObservable';
 import { StepperMenu } from '../Stepper/StepperMenu';
-import { playingSubject } from '../../utils/states';
+import { Visualizer } from '../Visualizer';
+import { AppBar, DrawerHeader, Main } from './Home.styles';
 
 const drawerWidth = 240;
 
