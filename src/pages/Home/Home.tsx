@@ -12,6 +12,7 @@ import { Visualizer } from '../Visualizer';
 import { generate } from '../../utils';
 import { bubbleSort, insertionSort, mergeSort } from '../../algorithms';
 import { StepperMenu } from '../Stepper/StepperMenu';
+import { playingSubject } from '../../utils/states';
 
 const drawerWidth = 240;
 
@@ -26,7 +27,18 @@ export const Home = () => {
   };
 
   const array = generate(18)
+
   const [isPlaying, setIsPlaying] = React.useState(false);
+
+  React.useEffect(() => {
+    const playingSubscription = playingSubject.subscribe((value) => {
+      setIsPlaying(value)
+    });
+
+    return () => {
+      playingSubscription.unsubscribe();
+    };
+  }, [])
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -54,7 +66,7 @@ export const Home = () => {
           {theme.direction === 'ltr' ? <Icon icon='chevron_left' onClick={handleDrawer} /> : <Icon icon='chevron_right' />}
         </DrawerHeader>
         <Divider />
-        <StepperMenu  playAnimation={setIsPlaying}/>
+        <StepperMenu />
       </Drawer>
       <Main open={open}>
         <DrawerHeader />

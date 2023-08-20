@@ -7,6 +7,7 @@ import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import { Paragraph } from '../../components';
+import { playingSubject } from '../../utils/states';
 
 const steps = [
   {
@@ -25,11 +26,7 @@ const steps = [
   },
 ];
 
-interface StepperParams {
-  playAnimation: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-export const StepperMenu = ({ playAnimation }: StepperParams) => {
+export const StepperMenu = () => {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
@@ -43,6 +40,10 @@ export const StepperMenu = ({ playAnimation }: StepperParams) => {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+  const handlePlay = () => {
+    playingSubject.next(true);
+  }
 
   return (
     <Box sx={{ maxWidth: 400 }}>
@@ -58,7 +59,7 @@ export const StepperMenu = ({ playAnimation }: StepperParams) => {
                 <div>
                   <Button
                     variant="contained"
-                    onClick={index === steps.length - 1 ? () => playAnimation(true) : handleNext}
+                    onClick={index === steps.length - 1 ? handlePlay : handleNext}
                     sx={{ mt: 1, mr: 1 }}
                   >
                     {index === steps.length - 1 ? 'Run' : 'Next'}
