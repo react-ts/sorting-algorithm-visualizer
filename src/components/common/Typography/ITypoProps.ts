@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react"
-import { Alignment, IFontSize, IFontWeight } from "../themes/interfaces/Typography"
-import { IFindColor } from "../themes/utils/findPaletteColor"
+import { Alignment, IFontSize, IFontWeight } from "../Theme/interfaces/Typography"
+import { IFindColor } from "../Theme/utils/findPaletteColor"
 
 export interface ITypoProps<T extends HTMLElement> extends HTMLAttributes<T> {
   size?: keyof IFontSize

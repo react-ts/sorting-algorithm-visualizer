@@ -6,8 +6,7 @@ import StepContent from '@mui/material/StepContent';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import { useState } from 'react';
-import { Paragraph } from '../../components';
-import { playingSubject } from '../../utils/createObservable';
+import { Paragraph, useVisualizerConfigs } from '../../components';
 
 const steps = [
   {
@@ -28,7 +27,7 @@ const steps = [
 
 export const StepperMenu = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
-
+  const [ , dispatch ] = useVisualizerConfigs();
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -42,7 +41,7 @@ export const StepperMenu = () => {
   };
 
   const handlePlay = () => {
-    playingSubject.next(true);
+    dispatch({ isPlaying: true });
   }
 
   return (

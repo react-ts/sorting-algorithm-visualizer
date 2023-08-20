@@ -34,9 +34,8 @@ describe("quickSort tests", () => {
       { indexA: 7, indexB: 8, swap: true }
     ];
 
-    const movements = quickSort({ array });
+    const movements = quickSort(array);
     expect(movements).toBeInstanceOf<IMovement[]>
     expect(movements).toStrictEqual(mockMovements)
-    expect(array).toStrictEqual([1, 3, 4, 4, 5, 5, 6, 9, 15])
   });
 });

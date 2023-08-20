@@ -42,11 +42,11 @@ const exec = ({ array, start, end, capture }: IQuickSortParams) => {
   }
 }
 
-export const quickSort = ({ array }: Pick<IQuickSortParams, "array">) => {
+export const quickSort = (array: number []) => {
   const movements: IMovement[] = [];
 
   exec({ 
-    array,
+    array: [ ...array ],
     start: 0,
     end: array.length - 1,
     capture: capture(movements) 
