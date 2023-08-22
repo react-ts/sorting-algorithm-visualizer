@@ -5,7 +5,7 @@ import { getListItemsBoundings } from "../../utils";
 const createObserver = (callback: MutationCallback) => new MutationObserver(callback);
 const cleanObserver = (observer: MutationObserver) => observer.disconnect();
 
-export const useAnimation = <T extends HTMLElement> (): { ref: RefCallback<T> } => {
+export const useAnimation = <T extends HTMLElement> (seconds: number): { ref: RefCallback<T> } => {
   const [ element, setElement ] = useState<T>();
   const [ currentBounds, setCurrentBounds ] = useState<any>({});
   const previousBounds = usePrevious(currentBounds, [currentBounds])
@@ -51,13 +51,13 @@ export const useAnimation = <T extends HTMLElement> (): { ref: RefCallback<T> } 
           domNode.style.transition = "transform 0s";
           requestAnimationFrame(() => {
             domNode.style.transform = "";
-            domNode.style.transition = "transform 0.2s";
+            domNode.style.transition = `transform ${seconds}s`;
           });
         });
       }
     }
        
-  }, [currentBounds, previousBounds, element]);
+  }, [currentBounds, previousBounds, element, seconds]);
   
   return { ref };
 };

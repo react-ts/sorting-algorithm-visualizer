@@ -6,12 +6,16 @@ import { createObservable, generate } from "../../utils";
 export interface IVisualizerState {
   isPlaying: boolean,
   array: number [],
+  delayTime: number,
+  showNumbers: boolean,
   algorithms: ((array: number []) => IMovement []) [],
 }
 
 const [ visualizerObs, dispatch ] = createObservable<IVisualizerState>({
   isPlaying: false,
-  array: generate(15),
+  array: generate(35),
+  delayTime: 0.1,
+  showNumbers: false,
   algorithms: []
 })
 

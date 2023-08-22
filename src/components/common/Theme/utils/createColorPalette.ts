@@ -7,6 +7,7 @@ export const createColorPalette = ({
   secondary,
   success,
   warning,
+  info,
   error,
 }: IBaseColorPalette) => {
   return {
@@ -15,6 +16,7 @@ export const createColorPalette = ({
     success: createColors(success),
     warning: createColors(warning),
     error: createColors(error),
+    info: createColors(info),
     black: "#000000",
     white: "#ffffff"
   } as IColorPalette

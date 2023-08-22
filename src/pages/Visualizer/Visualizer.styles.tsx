@@ -1,9 +1,14 @@
 import styled from '@emotion/styled'
+import { Paper } from '@mui/material'
 
-export const StyledDiv = styled.div<{
-  greenColor: boolean
-}>`
-  ${({ greenColor, theme }: any) => greenColor && 
-    `color: ${theme.palette.find({ color: 'primary', grade: 900 })}`
-  };
+export const StyledPaper = styled(Paper)`
+  &.MuiPaper-elevation { 
+    padding: 25px;
+    > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 `
