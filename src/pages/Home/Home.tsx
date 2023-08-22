@@ -1,52 +1,30 @@
-import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
-import Toolbar from '@mui/material/Toolbar';
-import Divider from '@mui/material/Divider';
-import { Icon, Paragraph } from '../../components';
-import { AppBar, DrawerHeader, Main } from './Home.styles';
 import { Grid } from '@mui/material';
-import { Visualizer } from '../Visualizer';
-import { generate } from '../../utils';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import Toolbar from '@mui/material/Toolbar';
+import { useTheme } from '@mui/material/styles';
+import { useState } from 'react';
 import { bubbleSort, insertionSort, mergeSort } from '../../algorithms';
+import { Icon, Paragraph, useVisualizerConfigs } from '../../components';
 import { StepperMenu } from '../Stepper/StepperMenu';
-import { playingSubject } from '../../utils/states';
-
+import { Visualizer } from '../Visualizer';
+import { AppBar, DrawerHeader, Main } from './Home.styles';
 const drawerWidth = 240;
-
-
 
 export const Home = () => {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawer = () => {
-    setOpen(!open);
-  };
-
-  const array = generate(18)
-
-  const [isPlaying, setIsPlaying] = React.useState(false);
-
-  React.useEffect(() => {
-    const playingSubscription = playingSubject.subscribe((value) => {
-      setIsPlaying(value)
-    });
-
-    return () => {
-      playingSubscription.unsubscribe();
-    };
-  }, [])
+  const [open, setOpen] = useState(true);
+  const [{ isPlaying, array }] = useVisualizerConfigs();
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
-          <Icon icon='menu' iconColor={{ color: 'white' }} onClick={handleDrawer} />
-          <Paragraph capitalized={true} size='md' textColor={{color:'white'}} >Algorithm Visualizer</Paragraph>
+          <Icon icon='menu' iconColor={{ color: 'white' }} onClick={() => setOpen(!open)} />
+          <Paragraph capitalized={true} size='md' textColor={{ color: 'white' }} >Algorithm Visualizer</Paragraph>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -63,7 +41,7 @@ export const Home = () => {
         open={open}
       >
         <DrawerHeader>
-          {theme.direction === 'ltr' ? <Icon icon='chevron_left' onClick={handleDrawer} /> : <Icon icon='chevron_right' />}
+          {theme.direction === 'ltr' ? <Icon icon='chevron_left' onClick={() => setOpen(!open)} /> : <Icon icon='chevron_right' />}
         </DrawerHeader>
         <Divider />
         <StepperMenu />

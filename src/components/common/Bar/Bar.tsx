@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { HTMLAttributes } from "react";
-import { IColorPalette } from "../themes/interfaces/Color";
+import { IColorPalette } from "../Theme/interfaces/Color";
 
 export interface IBarProps extends HTMLAttributes<HTMLUListElement>{
   isPivot: boolean,
