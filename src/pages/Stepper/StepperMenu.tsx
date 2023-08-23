@@ -41,7 +41,7 @@ export const StepperMenu = () => {
   };
 
   const handlePlay = () => {
-    dispatch({ isPlaying: true });
+    dispatch({ isPlaying: true, menuIsOpen: false });
   }
 
   return (
