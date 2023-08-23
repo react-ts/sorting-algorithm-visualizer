@@ -9,6 +9,7 @@ export interface IVisualizerState {
   delayTime: number,
   showNumbers: boolean,
   algorithms: ((array: number []) => IMovement []) [],
+  menuIsOpen: boolean
 }
 
 const [ visualizerObs, dispatch ] = createObservable<IVisualizerState>({
@@ -16,20 +17,21 @@ const [ visualizerObs, dispatch ] = createObservable<IVisualizerState>({
   array: generate(35),
   delayTime: 0.1,
   showNumbers: false,
-  algorithms: []
+  algorithms: [],
+  menuIsOpen: false
 })
 
 const [ useVisualizerConfigsHook, useVisualizerConfigsHookObs$ ] = bind(visualizerObs);
 
 export const useVisualizerConfigs = () : [ IVisualizerState, typeof dispatch ]  => {
-  const suscription = useMemo(() => useVisualizerConfigsHookObs$.subscribe(), [useVisualizerConfigsHookObs$]);
+  const subscription = useMemo(() => useVisualizerConfigsHookObs$.subscribe(), []);
   const state = useVisualizerConfigsHook();
 
   useEffect(() => {
     return () => {
-      suscription.unsubscribe()
+      subscription.unsubscribe()
     }
-  }, [useVisualizerConfigsHookObs$])
+  }, [subscription])
   
   return [ state, dispatch ];
 };
