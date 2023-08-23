@@ -1,45 +1,63 @@
-import { useEffect, useState } from "react";
-import { BarList } from "../../components/common/BarList/BarList";
-import { useDelay } from "../../components/hooks";
+import { useCallback, useEffect, useState } from "react";
+import { BarList, Heading, useAnimation, useDelay } from "../../components";
 import { IMovement } from "../../interfaces";
+import { StyledPaper } from './Visualizer.styles';
 
 interface IVisualizerParams {
-  arr: number[]
-  algorithm: (arr: number[]) => IMovement[]
+  array: number[],
+  delayTime: number,
+  algorithm: (array: number[]) => IMovement[],
+  showNumbers: boolean,
   algorithmName: string
   playAnimation: boolean
 }
 
-export const Visualizer = ({ arr, algorithm, algorithmName, playAnimation }: IVisualizerParams) => {
-  const [movement, setMovement] = useState<IMovement | null>(null)
-  const [array] = useState<number[]>(arr);
-  const delay = useDelay(0.2);
+export const Visualizer = ({
+  array,
+  delayTime,
+  algorithm,
+  showNumbers,
+  algorithmName,
+  playAnimation,
+}: IVisualizerParams) => {
+  const [ movement, setMovement ] = useState<IMovement | null>(null)
+  const [ isSorted, setSorted ] = useState<boolean>(false);
+  const { ref } = useAnimation(delayTime);
+  const delay = useDelay(delayTime);
+
+  const startAnimation = useCallback(async(array: number []) => {
+    const movements = algorithm([ ...array ]);
+
+    for (let i = 0; i < movements.length; i++) {
+      setMovement((currentState) => ({ ...currentState, ...movements[i] }))
+      await delay()
+    }
+
+    setSorted(true);
+    
+  }, [algorithm, delay])
 
   useEffect(() => {
-    const play = async () => {
-      const movements = algorithm([ ...array ]);
-      for (let i = 0; i < movements.length; i++) {
-        setMovement((currentState) => ({ ...currentState, ...movements[i] }))
-        await delay()
-      }
-    }
-
-    if (playAnimation) {
-      play()
-    }
-  }, [playAnimation, algorithm, array, delay])
-
+    if (playAnimation) startAnimation(array);
+  }, [playAnimation, array, startAnimation])
 
   return (
-    <div>
+    <StyledPaper
+      variant='elevation'
+      elevation={24}
+    >
       <div>
-        <span>{algorithmName} sort {playAnimation ? "is playing" : ""}</span>
+        <Heading as="h6" size="md">{algorithmName}</Heading>
       </div>
       <div>
         <BarList
-          collection={[...array]}
-          movement={movement} />
+          array={[...array]}
+          movement={movement}
+          isSorted={isSorted}
+          showNumbers={showNumbers}
+          ref={ref}
+        />
       </div>
-    </div>
+    </StyledPaper>
   )
 }

@@ -1,23 +1,29 @@
-import { memo, useEffect, useState } from "react";
+import { ForwardedRef, forwardRef, useEffect, useState } from "react";
 import { IMovement } from "../../../interfaces";
 import "../../../utils/swap";
-import { useAnimation } from "../../hooks";
 import { Bar } from "../Bar";
 import { StyledList } from "./BarList.styles";
 
 export interface IBarList {
-  collection: number [],
-  movement: IMovement | null
+  array: number [],
+  movement: IMovement | null,
+  isSorted: boolean,
+  showNumbers: boolean,
 }
 
-export const BarList = memo(({ collection, movement }: IBarList) => {
-  const [ numbers, setNumbers ] = useState(collection);
+export const BarList = forwardRef(({ 
+  array,
+  movement,
+  isSorted,
+  showNumbers,
+}: IBarList, ref: ForwardedRef<HTMLUListElement> ) => {
+  const [ numbers, setNumbers ] = useState(array);
   const { indexA, indexB, swap } = movement ?? { indexA: -1, indexB: -1 };
-  const { ref } = useAnimation<HTMLUListElement>()
   
   useEffect(() => {
-    if(swap) setNumbers(numbers.swap(indexA, indexB))
-  }, [movement])
+    if(swap)
+     setNumbers(numbers.swap(indexA, indexB))
+  }, [ movement ])
  
   return (
     <StyledList ref={ref}>
@@ -26,10 +32,12 @@ export const BarList = memo(({ collection, movement }: IBarList) => {
           <Bar  
             id={value.toString()}
             key={value}
-            isSelected={indexB === index }
-            isPivot={indexA === index}
             value={value}
             width={20}
+            isSelected={indexB === index }
+            isPivot={indexA === index}
+            isSorted={isSorted}
+            showNumbers={numbers.length <= 50 && showNumbers}
           />
         ))
       }     
