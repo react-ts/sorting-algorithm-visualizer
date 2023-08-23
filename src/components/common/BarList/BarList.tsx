@@ -23,7 +23,7 @@ export const BarList = forwardRef(({
   useEffect(() => {
     if(swap)
      setNumbers(numbers.swap(indexA, indexB))
-  }, [ movement ])
+  }, [ movement, indexA, indexB, numbers, swap ])
  
   return (
     <StyledList ref={ref}>

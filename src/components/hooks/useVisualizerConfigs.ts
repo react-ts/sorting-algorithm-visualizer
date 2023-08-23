@@ -14,7 +14,7 @@ export interface IVisualizerState {
 
 const [ visualizerObs, dispatch ] = createObservable<IVisualizerState>({
   isPlaying: false,
-  array: generate(35),
+  array: generate(10),
   delayTime: 0.1,
   showNumbers: false,
   algorithms: [],
