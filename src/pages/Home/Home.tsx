@@ -5,9 +5,9 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
 import { Icon, Paragraph, useVisualizerConfigs } from '../../components';
-import { StepperMenu } from './components/StepperMenu/StepperMenu';
 import { Visualizer } from '../Visualizer';
 import { AppBar, DrawerHeader, Main } from './Home.styles';
+import { StepperMenu } from './components/StepperMenu/StepperMenu';
 const drawerWidth = 340;
 
 export const Home = () => {
