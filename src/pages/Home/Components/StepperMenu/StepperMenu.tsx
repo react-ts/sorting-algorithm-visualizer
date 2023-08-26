@@ -6,9 +6,8 @@ import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import { useMemo, useState } from 'react';
 import { Icon, Paragraph, useVisualizerConfigs } from '../../../../components';
-import { LengthSelector } from '../LengthSelector/LengthSelector';
-import { AlgorithmSelector } from '../AlgorithmSelector/AlgorithmSelector';
 import { IColorPalette } from '../../../../components/common/Theme/interfaces/Color';
+import { AlgorithmSelector, LengthSelector } from '..';
 
 export const StepperMenu = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
