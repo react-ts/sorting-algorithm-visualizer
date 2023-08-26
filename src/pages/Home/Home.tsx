@@ -7,7 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import { Icon, Paragraph, useVisualizerConfigs } from '../../components';
 import { Visualizer } from '../Visualizer';
 import { AppBar, DrawerHeader, Main } from './Home.styles';
-import { StepperMenu } from './components/StepperMenu/StepperMenu';
+import { StepperMenu } from './components';
 const drawerWidth = 340;
 
 export const Home = () => {
