@@ -8,6 +8,7 @@ import { useMemo, useState } from 'react';
 import { Icon, Paragraph, useVisualizerConfigs } from '../../../../components';
 import { LengthSelector } from '../LengthSelector/LengthSelector';
 import { AlgorithmSelector } from '../AlgorithmSelector/AlgorithmSelector';
+import { IColorPalette } from '../../../../components/common/Theme/interfaces/Color';
 
 export const StepperMenu = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
@@ -15,7 +16,7 @@ export const StepperMenu = () => {
 
   const icon = useMemo(
     () =>
-      !isPlaying ? { icon: "play_arrow", color: "success" } : { icon: "pause", color: "warning" }, [isPlaying]
+      !isPlaying ? { icon: "play_arrow", color: "success" as keyof IColorPalette } : { icon: "pause", color: "warning" as keyof IColorPalette }, [isPlaying]
   )
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
