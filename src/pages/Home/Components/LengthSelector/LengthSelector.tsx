@@ -4,31 +4,26 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useVisualizerConfigs } from '../../../../components';
 import { generate } from '../../../../utils';
-import { useState } from 'react';
 
 export const LengthSelector = () => {
-  const [ , dispatch ] = useVisualizerConfigs();
-  const [length, setLength] = useState('');
+  const [ {array}, dispatch ] = useVisualizerConfigs();
   
   const handleChange = (event: SelectChangeEvent) => {
-    setLength(event.target.value);
-    const number = Number(event.target.value)
-    const array = generate(number)
-    dispatch({array: array})
+    const length = Number(event.target.value)
+    dispatch({array: generate(length)})
   };
 
   return (
     <div>
-      <FormControl sx={{ m: 1 }}>
-        <InputLabel id="array-length-label">Array Length</InputLabel>
+      <FormControl sx={{ m: 1, minWidth: 85}} size='small'>
+        <InputLabel id="array-length-label">Length</InputLabel>
         <Select
           labelId="array-length-select-label"
           id="length-length"
-          value={length}
+          value={array.length.toString()}
           onChange={handleChange}
           autoWidth
-          label="Array Length"
-          defaultValue='10'
+          label="Length"
         >
           <MenuItem value={10}>10</MenuItem>
           <MenuItem value={25}>25</MenuItem>
