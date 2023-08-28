@@ -9,7 +9,7 @@ import { Visualizer } from '../Visualizer';
 import { AppBar, DrawerHeader, Main } from './Home.styles';
 import { mergeSort } from '../../algorithms';
 import { generate } from '../../utils';
-import { StepperMenu } from './compo';
+import { StepperMenu } from './components';
 const drawerWidth = 340;
 
 export const Home = () => {
