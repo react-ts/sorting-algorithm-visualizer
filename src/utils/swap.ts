@@ -19,10 +19,4 @@ Array.prototype.voidSwap = function (indexA: number, indexB: number): void {
   this[indexB] = stored
 }
 
-Array.prototype.partialSwap = function (indexA:number, indexB: number): number[] {
-  const stored = this[indexA];
-  this[indexB] = stored;
-  return [...this];
-}
-
 export { };
