@@ -2,6 +2,7 @@ declare global {
   interface Array<T> {
     swap(i: number, j: number): Array<T>;
     voidSwap(i: number, j: number): void;
+    
   }
 }
 
