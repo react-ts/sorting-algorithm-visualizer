@@ -5,9 +5,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
-import { bubbleSort, insertionSort, mergeSort, quickSort } from '../../../../algorithms';
 import { useVisualizerConfigs } from '../../../../components';
 
+const algorithmsImported = await import('../../../../algorithms')
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -19,37 +19,25 @@ const MenuProps = {
   },
 };
 
-const algorithmsList = [
-  {
-    name: "Bubble Sort",
-    algorithm: bubbleSort
-  },
-  {
-    name: "Insertion Sort",
-    algorithm: insertionSort
-  },
-  {
-    name: "Merge Sort",
-    algorithm: mergeSort
-  },
-  {
-    name: "Quick Sort",
-    algorithm: quickSort
-  },
-]
-
 export const AlgorithmSelector = () => {
-  const [{algorithms}, dispatch] = useVisualizerConfigs();
+  const [{ algorithms }, dispatch] = useVisualizerConfigs();
+
+  const algorithmsList: typeof algorithms = []
+
+  const exportedFunctions = Object.keys(algorithmsImported).map(key => algorithmsImported[key]) as ((array: number[]) => IMovement[])[]
+
+  exportedFunctions.forEach(func => {
+    algorithmsList.push(func)
+  })
 
   const handleChange = (event: SelectChangeEvent<typeof algorithms>) => {
     const {
       target: { value },
     } = event;
 
-    if (typeof value !== 'string')
-    {
-      dispatch({algorithms: value})
-    }    
+    if (typeof value !== 'string') {
+      dispatch({ algorithms: value })
+    }
   };
 
   return (
@@ -75,7 +63,7 @@ export const AlgorithmSelector = () => {
           {algorithmsList.map((algorithm) => (
             <MenuItem
               key={algorithm.name}
-              value={algorithm as any}
+              value={ algorithm as any}
             >
               {algorithm.name}
             </MenuItem>

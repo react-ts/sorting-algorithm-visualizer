@@ -8,7 +8,7 @@ export interface IVisualizerState {
   array: number [],
   delayTime: number,
   showNumbers: boolean,
-  algorithms: {name: string, algorithm: ((array: number []) => IMovement [])} [],
+  algorithms: ((array: number []) => IMovement []) [],
   menuIsOpen: boolean,
 }
 

@@ -7,8 +7,6 @@ import Toolbar from '@mui/material/Toolbar';
 import { Icon, Paragraph, useVisualizerConfigs } from '../../components';
 import { Visualizer } from '../Visualizer';
 import { AppBar, DrawerHeader, Main } from './Home.styles';
-import { mergeSort } from '../../algorithms';
-import { generate } from '../../utils';
 import { StepperMenu } from './components';
 const drawerWidth = 340;
 
@@ -22,10 +20,6 @@ export const Home = () => {
     menuIsOpen,
     algorithms
   }, dispatch] = useVisualizerConfigs();
-
-  const algo = generate(10)
-  console.log(algo)
-  console.log(mergeSort(algo))
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -81,9 +75,9 @@ export const Home = () => {
           spacing={3}
         >
           {
-            algorithms.map(({ name, algorithm }) => (
+            algorithms.map((algorithm) => (
               <Grid
-                key={name}
+                key={algorithm.name}
                 item
                 xs={12}
                 md={6}
@@ -92,7 +86,7 @@ export const Home = () => {
                 <Visualizer
                   array={array}
                   algorithm={algorithm}
-                  algorithmName={name}
+                  algorithmName={algorithm.name}
                   playAnimation={isPlaying}
                   delayTime={delayTime}
                   showNumbers={showNumbers}
