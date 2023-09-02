@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
-import { bubbleSort, insertionSort, mergeSort, quickSort } from '../../../../algorithms';
+import { bubbleSort, insertionSort, mergeSort, quickSort, shellSort } from '../../../../algorithms';
 import { useVisualizerConfigs } from '../../../../components';
 
 const ITEM_HEIGHT = 48;
@@ -35,6 +35,10 @@ const algorithmsList = [
   {
     name: "Quick Sort",
     algorithm: quickSort
+  },
+  {
+    name: "Shell Sort",
+    algorithm: shellSort
   },
 ]
 
