@@ -42,18 +42,18 @@ const algorithmsList = [
   },
 ]
 
-export const AlgorithmSelector = () => {
-  const [{algorithms}, dispatch] = useVisualizerConfigs();
+export const AlgorithmSelector = () => { 
+
+  const [{ algorithms }, dispatch] = useVisualizerConfigs();
 
   const handleChange = (event: SelectChangeEvent<typeof algorithms>) => {
     const {
       target: { value },
     } = event;
 
-    if (typeof value !== 'string')
-    {
-      dispatch({algorithms: value})
-    }    
+    if (typeof value !== 'string') {
+      dispatch({ algorithms: value })
+    }
   };
 
   return (
@@ -79,7 +79,7 @@ export const AlgorithmSelector = () => {
           {algorithmsList.map((algorithm) => (
             <MenuItem
               key={algorithm.name}
-              value={algorithm as any}
+              value={ algorithm as any}
             >
               {algorithm.name}
             </MenuItem>
