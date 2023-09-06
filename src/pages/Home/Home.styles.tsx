@@ -3,9 +3,7 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 
 const drawerWidth = 240;
 
-export const Main = styled('main')<{
-  open?: boolean;
-}>(({ theme }) => ({
+export const Main = styled('main')(({ theme }) => ({
   flexGrow: 1,
   width: '100%',
   padding: theme.spacing(3),
@@ -15,7 +13,7 @@ export const Main = styled('main')<{
       duration: theme.transitions.duration.enteringScreen,
     }),
     marginLeft: 0,
-  }),
+  })
 }));
 
 interface AppBarProps extends MuiAppBarProps {

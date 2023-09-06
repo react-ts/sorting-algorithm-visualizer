@@ -7,5 +7,6 @@ export interface ITypoProps<T extends HTMLElement> extends HTMLAttributes<T> {
   weight?: keyof IFontWeight,
   textColor?: IFindColor,
   alignment?: Alignment, 
-  capitalized?: boolean 
+  capitalized?: boolean,
+  visible?: boolean
 }
