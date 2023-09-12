@@ -1,8 +1,8 @@
-import { IMovement } from "../interfaces";
+import { IAlgorithm, IMovement } from "../interfaces";
 import { capture } from "../utils";
 import '../utils/swap';
 
-export const shellSort = (array: number[]) => {
+const shellSortExecutor = (array: number[]) => {
   const movements: IMovement[] = [];
   const captureMove = capture(movements)
   let copyArray = [...array];
@@ -25,3 +25,8 @@ export const shellSort = (array: number[]) => {
   return movements;
 }
 
+export const shellSortDef: IAlgorithm = {
+  name: "Shell Sort",
+  complexity: "O(n ^ 2)",
+  executor: shellSortExecutor,
+}

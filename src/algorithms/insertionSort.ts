@@ -1,8 +1,8 @@
-import { IMovement } from "../interfaces";
+import { IAlgorithm, IMovement } from "../interfaces";
 import { capture } from "../utils";
 import '../utils/swap';
 
-export const insertionSort = (array: number[]) => {
+const insertionSortExecutor = (array: number[]) => {
   const movements: IMovement[] = [];
   const captureMove = capture(movements)
   let copyArray = [ ...array ];
@@ -20,3 +20,8 @@ export const insertionSort = (array: number[]) => {
   return movements;
 }
 
+export const insertionSortDef: IAlgorithm = {
+  name: "Insertion Sort",
+  complexity: "O(n ^ 2)",
+  executor: insertionSortExecutor,
+}

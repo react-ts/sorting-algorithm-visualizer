@@ -1,8 +1,8 @@
-import { IMovement } from "../interfaces";
+import { IAlgorithm, IMovement } from "../interfaces";
 import { capture } from "../utils";
 import '../utils/swap';
 
-export const bubbleSort = (array: number []) => {
+const bubbleSortExecutor = (array: number []) => {
   const movements: IMovement [] = [];
   const captureMove = capture(movements)
   let copyArray = [ ...array ];
@@ -17,8 +17,11 @@ export const bubbleSort = (array: number []) => {
       }
     }
   }
-  
   return movements;
 }
 
-
+export const bubbleSortDef: IAlgorithm = {
+  name: "Bubble Sort",
+  complexity: "O(n ^ 2)",
+  executor: bubbleSortExecutor,
+}

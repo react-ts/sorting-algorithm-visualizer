@@ -1,4 +1,4 @@
-import { IMovement } from "../interfaces";
+import { IAlgorithm, IMovement } from "../interfaces";
 import { capture } from "../utils";
 import '../utils/swap';
 
@@ -28,7 +28,7 @@ const partition = ({ array, start, end, capture }: IQuickSortParams) => {
   return i;
 }
 
-const exec = ({ array, start, end, capture }: IQuickSortParams) => {
+const recursiveExec = ({ array, start, end, capture }: IQuickSortParams) => {
   if(start < end){
     const pivot = partition({
       array,
@@ -37,15 +37,15 @@ const exec = ({ array, start, end, capture }: IQuickSortParams) => {
       capture
     });
 
-    exec({ array, start, end: pivot - 1, capture });
-    exec({ array, start: pivot + 1, end, capture });
+    recursiveExec({ array, start, end: pivot - 1, capture });
+    recursiveExec({ array, start: pivot + 1, end, capture });
   }
 }
 
-export const quickSort = (array: number []) => {
+const quickSortExecutor = (array: number []) => {
   const movements: IMovement[] = [];
 
-  exec({ 
+  recursiveExec({ 
     array: [ ...array ],
     start: 0,
     end: array.length - 1,
@@ -53,4 +53,10 @@ export const quickSort = (array: number []) => {
   });
 
   return movements;
+}
+
+export const quickSortDef: IAlgorithm = {
+  name: "Quick Sort",
+  complexity: "O(log(n))",
+  executor: quickSortExecutor,
 }
