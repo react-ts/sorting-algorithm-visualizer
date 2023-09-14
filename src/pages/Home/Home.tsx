@@ -1,91 +1,58 @@
-import { Grid, useTheme } from '@mui/material';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import Toolbar from '@mui/material/Toolbar';
-import { Icon, Paragraph, useVisualizerConfigs } from '../../components';
-import { Visualizer } from '../Visualizer';
-import { AppBar, DrawerHeader, Main } from './Home.styles';
-import { StepperMenu } from './components';
-const drawerWidth = 340;
+import { Paragraph } from '@components';
+import { withBaseWrapper } from '@hoc';
+import { DrawerHeader } from '@hoc/withBaseWrapper/withBaseWrapper.styles';
+import { useVisualizerConfigs } from '@hooks';
+import { Box, Grid } from '@mui/material';
+import { useMemo } from 'react';
+import { Main } from './Home.styles';
+import { Visualizer } from './components';
 
-export const Home = () => {
-  const theme = useTheme()
-  const [{
+const HomePage = () => {
+  const [{ 
     array,
     isPlaying,
     delayTime,
     showNumbers,
-    menuIsOpen,
-    algorithms
-  }, dispatch] = useVisualizerConfigs();
+    selectedAlgorithms
+  }] = useVisualizerConfigs();
+
+  const { xs, md, lg } = useMemo(() => ({
+    xs: 12,
+    md: selectedAlgorithms.length > 1 ? 6 : 12,
+    lg: selectedAlgorithms.length > 2 ? 4 : selectedAlgorithms.length > 1 ? 6 : 12,
+  }), [selectedAlgorithms]);
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed">
-        <Toolbar>
-          <Icon
-            icon='menu'
-            iconColor={{ color: 'white' }}
-            onClick={() => dispatch({ menuIsOpen: !menuIsOpen })}
-          />
-          <Paragraph
-            capitalized={true}
-            size='md'
-            textColor={{ color: 'white' }}
-          >
-            Algorithm Visualizer
-          </Paragraph>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        sx={{
-          display: {},
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
-        }}
-        variant="temporary"
-        open={menuIsOpen}
-        ModalProps={{
-          keepMounted: true,
-        }}
-      >
-        <DrawerHeader>
-          {theme.direction === 'ltr' ? <Icon icon='chevron_left' onClick={() => dispatch({ menuIsOpen: !menuIsOpen })} /> : <Icon icon='chevron_right' />}
-        </DrawerHeader>
-        <Divider />
-        <StepperMenu />
-      </Drawer>
+    <Box sx={{ display: 'flex', width: '100%' }}>
       <Main>
         <DrawerHeader />
         <Paragraph
-          visible={algorithms.length === 0}
+          visible={selectedAlgorithms.length === 0}
           capitalized={false}
           size='lg'
-          textColor={{ color: 'black' }}
           as={'h1'}
           alignment='center'
         >
           Please select which algorithms you want to visualize by clicking on the left menu.
         </Paragraph>
         <Grid
+        className='parent'
           wrap='wrap'
           container
           spacing={3}
         >
           {
-            algorithms.map(({name, algorithm}) => (
+            selectedAlgorithms.map(({ name, executor }) => (
               <Grid
                 key={name}
                 item
-                xs={12}
-                md={6}
-                lg={4}
+                xs={xs}
+                md={md}
+                lg={lg}
               >
                 <Visualizer
                   array={array}
-                  algorithm={algorithm}
+                  algorithm={executor}
                   algorithmName={name}
                   playAnimation={isPlaying}
                   delayTime={delayTime}
@@ -99,3 +66,5 @@ export const Home = () => {
     </Box>
   );
 }
+
+export const Home = withBaseWrapper(HomePage);

@@ -1,4 +1,4 @@
-import { IMovement } from "../interfaces"
+import { IAlgorithm, IMovement } from "../interfaces"
 import { capture } from "../utils"
 
 interface IMergeSortParams {
@@ -48,24 +48,24 @@ const merge = ({ array, start, mid, end, capture }: IMergeSortParams) => {
 
 }
 
-const exec = ({ array, start, mid, end, capture }: IMergeSortParams) => {
+const recursiveExec = ({ array, start, mid, end, capture }: IMergeSortParams) => {
   if (start >= end)
     return
 
   mid = Math.floor((start + end) / 2)
-  exec({ array, start, mid, end: mid, capture })
-  exec({ array, start: mid + 1, mid, end, capture })
+  recursiveExec({ array, start, mid, end: mid, capture })
+  recursiveExec({ array, start: mid + 1, mid, end, capture })
 
   merge({ array, start, mid, end, capture })
 }
 
-export const mergeSort = (array: number[]) => {
+const mergeSortExecutor = (array: number[]) => {
   const movements: IMovement[] = [];
   const start = 0
   const end = array.length - 1
   const mid = Math.floor((start + end) / 2)
 
-  exec({
+  recursiveExec({
     array,
     start,
     mid,
@@ -74,4 +74,10 @@ export const mergeSort = (array: number[]) => {
   })
 
   return movements
+}
+
+export const mergeSortDef: IAlgorithm = {
+  name: "Merge Sort",
+  complexity: "O(n ^ 2)",
+  executor: mergeSortExecutor,
 }
