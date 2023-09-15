@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { selectionSort } from "../../../algorithms";
-import { IMovement } from "../../../interfaces";
+import { selectionSortDef } from "../../../src/algorithms";
+import { IMovement } from "../../../src/interfaces";
 
 describe("selectionSort tests", () => {
   test("should return an array of IMovement", () => {
@@ -43,7 +43,7 @@ describe("selectionSort tests", () => {
       { indexA: 5, indexB: 4, swap: true },
       { indexA: 5, indexB: 5, swap: true }
     ];
-    const movements = selectionSort(array);
+    const movements = selectionSortDef.executor(array);
     expect(movements).toBeInstanceOf<IMovement[]>
     expect(movements).toStrictEqual(mockMovements)
   });

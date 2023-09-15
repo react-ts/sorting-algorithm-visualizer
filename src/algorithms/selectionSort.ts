@@ -1,8 +1,8 @@
-import { IMovement } from "../interfaces";
+import { IAlgorithm, IMovement } from "../interfaces";
 import { capture } from "../utils";
 import '../utils/swap';
 
-export const selectionSort = (array: number[]) => {
+const selectionSortExecutor = (array: number[]) => {
   const movements: IMovement[] = [];
   const captureMove = capture(movements)
   let copyArray = [...array];
@@ -22,3 +22,8 @@ export const selectionSort = (array: number[]) => {
   return movements;
 }
 
+export const selectionSortDef: IAlgorithm = {
+  name: "Selection Sort",
+  complexity: "O(n ^ 2)",
+  executor: selectionSortExecutor,
+}

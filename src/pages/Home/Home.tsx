@@ -36,8 +36,6 @@ const HomePage = () => {
           Please select which algorithms you want to visualize by clicking on the left menu.
         </Paragraph>
         <Grid
-        className='parent'
-          wrap='wrap'
           container
           spacing={3}
         >
