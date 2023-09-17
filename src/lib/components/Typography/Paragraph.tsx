@@ -16,7 +16,7 @@ export const Paragraph = styled.p<ITypoProps<HTMLParagraphElement>>`
     if (capitalized) 
       styles += `text-transform: uppercase;`
     if (!visible) 
-      styles += `visibility: hidden;`
+      styles += `display: none;`
     
     return styles;
   }};

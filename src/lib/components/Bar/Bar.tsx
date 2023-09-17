@@ -47,17 +47,4 @@ export const Bar = styled.li<IBarProps>`
     isPivot,
     isSorted
   })};
-  
-  ${({ theme, value, showNumbers }: any) => showNumbers && `
-    &:after {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: ${value * 5}px;
-      content: "${value}";
-      color: ${theme.palette.find({ color: 'black' })};
-      transform: scaleY(-1);
-      font-size: 4.7px;
-    };
-  `}
 `

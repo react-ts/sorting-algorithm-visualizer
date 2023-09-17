@@ -78,6 +78,6 @@ const mergeSortExecutor = (array: number[]) => {
 
 export const mergeSortDef: IAlgorithm = {
   name: "Merge Sort",
-  complexity: "O(n ^ 2)",
+  complexity: "O(log(n))",
   executor: mergeSortExecutor,
 }
