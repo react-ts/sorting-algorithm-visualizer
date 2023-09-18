@@ -7,21 +7,19 @@ import StepContent from '@mui/material/StepContent';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import { useMemo, useState } from 'react';
-import { AlgorithmSelector } from '../AlgorithmSelector/AlgorithmSelector';
-
 import { Icon, Paragraph } from '../../../../components';
+import { AlgorithmSelector } from '../AlgorithmSelector/AlgorithmSelector';
 import { LengthSelector } from '../LengthSelector/LengthSelector';
-
 
 export const StepperMenu = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
-  const [{ array, isPlaying, selectedAlgorithms }, dispatch] = useVisualizerConfigs();
+  const [{ array, play, selectedAlgorithms }, dispatch] = useVisualizerConfigs();
 
   const icon = useMemo(
-    () => !isPlaying 
+    () => !play 
       ? { icon: "play_arrow", color: "success" as keyof IColorPalette } 
       : { icon: "pause", color: "warning" as keyof IColorPalette }, 
-    [isPlaying]
+    [play]
   )
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -32,11 +30,11 @@ export const StepperMenu = () => {
   };
 
   const handlePlay = () => {
-    dispatch({ isPlaying: !isPlaying, menuIsOpen: false });
+    dispatch({ play: !play, menuIsOpen: false });
   }
 
   const reset = () => {
-    dispatch({ selectedAlgorithms: [], isPlaying: false, array: [] })
+    dispatch({ selectedAlgorithms: [], play: false, array: [] })
     setActiveStep(0)
   }
 
@@ -48,18 +46,16 @@ export const StepperMenu = () => {
         activeStep={activeStep}
         orientation="vertical"
       >
-        <Step
-          key="LengthSelector"
-        >
+        <Step key="LengthSelector">
           <StepLabel>
-            {'Select the lenght of the array'}
+            Select the length of the array
           </StepLabel>
           <StepContent>
-            <Paragraph>{`Each of the selected algorithms will have the same array size so we can compare 
-              how they exactly behaves.`}</Paragraph>
-            <Box
-              sx={{ mb: 2 }}
-            >
+            <Paragraph>
+              Each of the selected algorithms will have the same array size so we can compare 
+              how they exactly behaves.
+            </Paragraph>
+            <Box sx={{ mb: 2 }}>
               <div>
                 <LengthSelector />
                 <Button
@@ -68,23 +64,21 @@ export const StepperMenu = () => {
                   onClick={handleNext}
                   sx={{ mt: 1, mr: 1 }}
                 >
-                  {'Next'}
+                  Next
                 </Button>
               </div>
             </Box>
           </StepContent>
         </Step>
-        <Step
-          key='AlgorithmsSelector'
-        >
+        <Step key='AlgorithmsSelector'>
           <StepLabel>
-            {'Select which algorithms you want to visualize'}
+            Select which algorithms you want to visualize
           </StepLabel>
           <StepContent>
-            <Paragraph>{'We have different algorithms yo show, please select at lease one.'}</Paragraph>
-            <Box
-              sx={{ mb: 2 }}
-            >
+            <Paragraph>
+              We have different algorithms yo show, please select at lease one.
+            </Paragraph>
+            <Box sx={{ mb: 2 }}>
               <div>
                 <AlgorithmSelector />
                 <Button
@@ -93,7 +87,7 @@ export const StepperMenu = () => {
                   sx={{ mt: 1, mr: 1 }}
                   disabled={selectedAlgorithms.length === 0}
                 >
-                  {'Next'}
+                  Next
                 </Button>
                 <Button
                   onClick={handleBack}
@@ -105,20 +99,16 @@ export const StepperMenu = () => {
             </Box>
           </StepContent>
         </Step>
-        <Step
-          key="Play"
-        >
+        <Step key="Play">
           <StepLabel>
-            {'Run'}
+            Run
           </StepLabel>
           <StepContent>
-            <Paragraph>{`Plese click on the play button to start the animation.`}</Paragraph>
-            <Box
-              sx={{ mb: 2 }}
-            >
-              <div
-                style={{ display: 'inline-flex', columnGap: '4px' }}
-              >
+            <Paragraph>
+              Please click on the play button to start the animation.
+            </Paragraph>
+            <Box sx={{ mb: 2 }}>
+              <div style={{ display: 'inline-flex', columnGap: '4px' }}>
                 <Button
                   onClick={handlePlay}
                   sx={{ mt: 1, mr: 1 }}

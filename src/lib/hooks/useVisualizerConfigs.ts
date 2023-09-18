@@ -4,19 +4,17 @@ import { IAlgorithm } from "../../interfaces";
 import { createObservable } from "../../utils";
 
 export interface IVisualizerState {
-  isPlaying: boolean,
+  play: boolean,
   array: number [],
   delayTime: number,
-  showNumbers: boolean,
   selectedAlgorithms: IAlgorithm [],
   menuIsOpen: boolean,
 }
 
 const [ visualizerObs, dispatch ] = createObservable<IVisualizerState>({
-  isPlaying: false,
+  play: false,
   array: [],
-  delayTime: 0.19,
-  showNumbers: false,
+  delayTime: 0.2,
   selectedAlgorithms: [],
   menuIsOpen: false,
 })

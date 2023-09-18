@@ -8,14 +8,12 @@ export interface IBarList {
   array: number [],
   movement: IMovement | null,
   isSorted: boolean,
-  showNumbers: boolean,
 }
 
 export const BarList = forwardRef(({ 
   array,
   movement,
   isSorted,
-  showNumbers,
 }: IBarList, ref: ForwardedRef<HTMLUListElement> ) => {
   const [ numbers, setNumbers ] = useState(array);
   const { indexA, indexB, swap } = movement ?? { indexA: -1, indexB: -1 };
@@ -37,7 +35,6 @@ export const BarList = forwardRef(({
             isSelected={indexB === index }
             isPivot={indexA === index}
             isSorted={isSorted}
-            showNumbers={numbers.length <= 50 && showNumbers}
           />
         ))
       }     

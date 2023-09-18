@@ -1,15 +1,19 @@
-import { RefCallback, useCallback, useEffect, useRef, useState } from "react";
+import { RefCallback, useCallback, useEffect, useState } from "react";
 import { usePrevious } from ".";
 import { getListItemsBoundings } from "../../utils";
 
-const createObserver = (callback: MutationCallback) => new MutationObserver(callback);
-const cleanObserver = (observer: MutationObserver) => observer.disconnect();
+interface IUseAnimation {
+  seconds: number,
+  requestAnimFrame?: boolean
+}
 
-export const useAnimation = <T extends HTMLElement> (seconds: number): { ref: RefCallback<T> } => {
+export const useAnimation = <T extends HTMLElement> ({
+  seconds,
+  requestAnimFrame = false
+}: IUseAnimation): { ref: RefCallback<T> } => {
   const [ element, setElement ] = useState<T>();
   const [ currentBounds, setCurrentBounds ] = useState<any>({});
   const previousBounds = usePrevious(currentBounds, [currentBounds])
-  const observer = useRef<MutationObserver>();
 
   const ref = useCallback((node: T) => {
     setElement(node);
@@ -18,22 +22,29 @@ export const useAnimation = <T extends HTMLElement> (seconds: number): { ref: Re
 
   useEffect(() => {
     if(!element) return;
-    if (observer.current) 
-      cleanObserver(observer.current);
-    
-    const obs = createObserver(([{ target }]) => {
+  
+    const mutationObs = new MutationObserver(([{ target }]) => {
       setCurrentBounds((prevState: any) => ({ 
         ...prevState,
         ...getListItemsBoundings(target as HTMLElement) 
       }));
     });
 
-    obs.observe(element, { childList: true })
+    const resizeObs = new ResizeObserver(([{ target }]) => {
+      setCurrentBounds((prevState: any) => ({ 
+        ...prevState,
+        ...getListItemsBoundings(target as HTMLElement) 
+      }));
+    })
+    
+    mutationObs.observe(element, { childList: true })
+    resizeObs.observe(element, { box: 'device-pixel-content-box' })
 
     return () => {
-      if(observer.current)
-        cleanObserver(observer.current)
+      mutationObs.disconnect()
+      resizeObs.disconnect()
     };
+    
   }, [element]);
 
   useEffect(() => {
@@ -45,7 +56,7 @@ export const useAnimation = <T extends HTMLElement> (seconds: number): { ref: Re
       const previousItemPosition = previousBounds[child.id];
       const currentItemPosition = currentBounds[child.id];
       const changeInX = previousItemPosition.left - currentItemPosition.left;
-      if (changeInX) {
+      if (changeInX && requestAnimFrame) {
         requestAnimationFrame(() => {
           domNode.style.transform = `translateX(${changeInX}px)`;
           domNode.style.transition = "transform 0s";
@@ -57,7 +68,7 @@ export const useAnimation = <T extends HTMLElement> (seconds: number): { ref: Re
       }
     }
        
-  }, [currentBounds, previousBounds, element, seconds]);
+  }, [currentBounds, previousBounds, element, seconds, requestAnimFrame]);
   
   return { ref };
 };

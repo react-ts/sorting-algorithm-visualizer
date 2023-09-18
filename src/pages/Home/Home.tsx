@@ -10,9 +10,8 @@ import { Visualizer } from './components';
 const HomePage = () => {
   const [{ 
     array,
-    isPlaying,
+    play,
     delayTime,
-    showNumbers,
     selectedAlgorithms
   }] = useVisualizerConfigs();
 
@@ -40,9 +39,9 @@ const HomePage = () => {
           spacing={3}
         >
           {
-            selectedAlgorithms.map(({ name, executor }) => (
+            selectedAlgorithms.map((algorithmDef, index) => (
               <Grid
-                key={name}
+                key={index}
                 item
                 xs={xs}
                 md={md}
@@ -50,15 +49,13 @@ const HomePage = () => {
               >
                 <Visualizer
                   array={array}
-                  algorithm={executor}
-                  algorithmName={name}
-                  playAnimation={isPlaying}
+                  algorithmDef={algorithmDef}
+                  play={play}
                   delayTime={delayTime}
-                  showNumbers={showNumbers}
                 />
               </Grid>
             ))
-          }
+          }  
         </Grid>
       </Main>
     </Box>

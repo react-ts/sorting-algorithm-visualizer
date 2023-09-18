@@ -1,33 +1,30 @@
 import { BarList, Heading } from "@components";
 import { useAnimation, useDelay } from "@hooks";
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { IAlgorithm, IMovement } from "../../../../interfaces";
 import { StyledPaper } from './Visualizer.styles';
 
 interface IVisualizerParams {
   array: number[],
   delayTime: number,
-  algorithm: IAlgorithm["executor"],
-  showNumbers: boolean,
-  algorithmName: string
-  playAnimation: boolean
+  algorithmDef: IAlgorithm
+  play: boolean
 }
 
-export const Visualizer = ({
+export const Visualizer = memo(({
+  play,
   array,
   delayTime,
-  algorithm,
-  showNumbers,
-  algorithmName,
-  playAnimation,
+  algorithmDef,
 }: IVisualizerParams) => {
   const [ movement, setMovement ] = useState<IMovement | null>(null)
   const [ isSorted, setSorted ] = useState<boolean>(false);
-  const { ref } = useAnimation(delayTime);
+  const { ref } = useAnimation({ seconds: delayTime, requestAnimFrame: play });
+  const { name, complexity, executor } = algorithmDef;
   const delay = useDelay(delayTime);
 
   const startAnimation = useCallback(async(array: number []) => {
-    const movements = algorithm([ ...array ]);
+    const movements = executor([ ...array ]);
 
     for (let i = 0; i < movements.length; i++) {
       setMovement((currentState) => ({ ...currentState, ...movements[i] }))
@@ -36,11 +33,11 @@ export const Visualizer = ({
 
     setSorted(true);
     
-  }, [algorithm, delay])
+  }, [executor, delay]);
 
   useEffect(() => {
-    if (playAnimation) startAnimation(array);
-  }, [playAnimation, array, startAnimation])
+    if (play) startAnimation(array);
+  }, [play, array, startAnimation])
 
   return (
     <StyledPaper
@@ -48,17 +45,17 @@ export const Visualizer = ({
       elevation={24} 
     >
       <div>
-        <Heading as="h6" size="md">{algorithmName}</Heading>
+        <Heading as="h6" size="lg">{name}</Heading>
+        <Heading as='h6' size="md">Complexity: {complexity}</Heading>
       </div>
       <div>
         <BarList
-          array={[...array]}
+          array={[ ...array ]}
           movement={movement}
           isSorted={isSorted}
-          showNumbers={showNumbers}
           ref={ref}
         />
       </div>
     </StyledPaper>
   )
-}
+})
