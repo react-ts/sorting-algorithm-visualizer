@@ -9,14 +9,16 @@ export interface IVisualizerState {
   delayTime: number,
   selectedAlgorithms: IAlgorithm [],
   menuIsOpen: boolean,
+  activeStep: number
 }
 
 const [ visualizerObs, dispatch ] = createObservable<IVisualizerState>({
   play: false,
   array: [],
-  delayTime: 0.2,
+  delayTime: 0,
   selectedAlgorithms: [],
   menuIsOpen: false,
+  activeStep: 0
 })
 
 const [ useVisualizerConfigsHook, useVisualizerConfigsHookObs$ ] = bind(visualizerObs);
