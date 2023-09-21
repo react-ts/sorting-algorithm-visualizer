@@ -75,7 +75,7 @@ export const StepperMenu = () => {
           </StepLabel>
           <StepContent>
             <Paragraph>
-              We have different algorithms yo show, please select at lease one.
+              We have different algorithms yo show, please select at least one.
             </Paragraph>
             <Box sx={{ mb: 2 }}>
               <div>
