@@ -6,27 +6,27 @@ import Step from '@mui/material/Step';
 import StepContent from '@mui/material/StepContent';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Icon, Paragraph } from '../../../../components';
 import { AlgorithmSelector } from '../AlgorithmSelector/AlgorithmSelector';
 import { LengthSelector } from '../LengthSelector/LengthSelector';
+import { SpeedSelector } from '../SpeedSelector/SpeedSelector';
 
 export const StepperMenu = () => {
-  const [activeStep, setActiveStep] = useState<number>(0);
-  const [{ array, play, selectedAlgorithms }, dispatch] = useVisualizerConfigs();
+  const [{ array, play, selectedAlgorithms, delayTime, activeStep }, dispatch] = useVisualizerConfigs();
 
   const icon = useMemo(
-    () => !play 
-      ? { icon: "play_arrow", color: "success" as keyof IColorPalette } 
-      : { icon: "pause", color: "warning" as keyof IColorPalette }, 
+    () => !play
+      ? { icon: "play_arrow", color: "success" as keyof IColorPalette }
+      : { icon: "pause", color: "warning" as keyof IColorPalette },
     [play]
   )
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    dispatch({ activeStep: activeStep + 1 });
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    dispatch({ activeStep: activeStep - 1 });
   };
 
   const handlePlay = () => {
@@ -34,8 +34,7 @@ export const StepperMenu = () => {
   }
 
   const reset = () => {
-    dispatch({ selectedAlgorithms: [], play: false, array: [] })
-    setActiveStep(0)
+    dispatch({ selectedAlgorithms: [], play: false, array: [], delayTime: 0, activeStep: 0 })
   }
 
   return (
@@ -52,7 +51,7 @@ export const StepperMenu = () => {
           </StepLabel>
           <StepContent>
             <Paragraph>
-              Each of the selected algorithms will have the same array size so we can compare 
+              Each of the selected algorithms will have the same array size so we can compare
               how they exactly behaves.
             </Paragraph>
             <Box sx={{ mb: 2 }}>
@@ -99,6 +98,32 @@ export const StepperMenu = () => {
             </Box>
           </StepContent>
         </Step>
+        <Step key='SpeedSelector'>
+          <StepLabel>
+            Select the speed of the animation in seconds
+          </StepLabel>
+          <StepContent>
+            <Box sx={{ mb: 2 }}>
+              <div>
+                <SpeedSelector />
+                <Button
+                  variant="contained"
+                  onClick={handleNext}
+                  sx={{ mt: 1, mr: 1 }}
+                  disabled={delayTime <= 0}
+                >
+                  Next
+                </Button>
+                <Button
+                  onClick={handleBack}
+                  sx={{ mt: 1, mr: 1 }}
+                >
+                  Back
+                </Button>
+              </div>
+            </Box>
+          </StepContent>
+        </Step>
         <Step key="Play">
           <StepLabel>
             Run
@@ -131,7 +156,6 @@ export const StepperMenu = () => {
                   />
                 </Button>
               </div>
-
             </Box>
           </StepContent>
         </Step>
