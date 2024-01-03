@@ -6,3 +6,4 @@ export * from './shellSort';
 export * from './selectionSort';
 export * from './cocktailSort';
 export * from './heapSort';
+export * from './countingSort';
