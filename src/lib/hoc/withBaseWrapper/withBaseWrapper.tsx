@@ -2,7 +2,6 @@ import { AppBar, Box, CssBaseline, Divider, Toolbar, useTheme } from "@mui/mater
 import { ComponentType, useMemo } from "react";
 import { Icon, Paragraph } from "../../components";
 import { useColorConfig, useVisualizerConfigs } from "../../hooks";
-import { StepperMenu } from "./components/StepperMenu/StepperMenu";
 import { Drawer, DrawerHeader } from "./withBaseWrapper.styles";
 
 export const withBaseWrapper = <T, > 
@@ -55,7 +54,6 @@ export const withBaseWrapper = <T, >
           />
         </DrawerHeader>
         <Divider />
-        <StepperMenu />
       </Drawer>
       <WrappedComponent {...props} />
     </Box>
